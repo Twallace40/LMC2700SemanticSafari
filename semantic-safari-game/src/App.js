@@ -104,9 +104,13 @@ const App = () => {
 	return (
 		<div className="background flex w-screen h-screen bg-[#DAC69A] items-center justify-center">
 			<div className="content flex flex-col w-[60%] h-[70%] gap-[10%] items-center justify-center">
-				<div className="gameDisplay flex w-[100%] h-[70%] p-4 border-4 border-black bg-white items-center justify-center">
+				<div
+					className={`gameDisplay flex w-[100%] h-[70%] p-4 border-4 border-black items-center justify-center ${
+						timer === 0 ? "bg-red-400" : "bg-white"
+					}`}
+				>
 					<div className="flex flex-col h-full items-center justify-center">
-						<h1 className="mb-2">Timer</h1>
+						<h1 className="mb-2 font-medium">Timer</h1>
 						<div className="flex w-8 h-full border-2 border-black items-end">
 							<div
 								className="w-full bg-yellow-300"
@@ -124,28 +128,36 @@ const App = () => {
 							}`}
 							onClick={handleGameStatus}
 						>
-							{running ? "END" : "START"}
+							{running ? "END GAME" : "START GAME"}
 						</button>
-						<p
-							id="question"
-							className="text-3xl font-semibold justify-self-start"
-						>
-							{question.definition}
-						</p>
+						{timer > 0 ? (
+							<p
+								id="question"
+								className="text-3xl font-semibold justify-self-start"
+							>
+								{question.definition}
+							</p>
+						) : (
+							<p className="text-3xl font-semibold justify-self-start">
+								GAME OVER
+							</p>
+						)}
 						<p id="score" className="text-3xl font-semibold justify-self-end">
 							Score: {score}
 						</p>
 					</div>
 					<div className="flex flex-col h-full items-center justify-center">
-						<h1 className="mb-2">Boost</h1>
+						<h1 className="mb-2 font-medium">Boost</h1>
 						<div className="flex w-8 h-full border-2 border-black items-end">
-							<div
-								className="w-full bg-orange-400"
-								style={{
-									height: `${(boost / 5) * 100}%`,
-									transition: "height 1s linear",
-								}}
-							></div>
+							{timer > 0 && (
+								<div
+									className="w-full bg-orange-400"
+									style={{
+										height: `${(boost / 5) * 100}%`,
+										transition: "height 1s linear",
+									}}
+								></div>
+							)}
 						</div>
 					</div>
 				</div>
