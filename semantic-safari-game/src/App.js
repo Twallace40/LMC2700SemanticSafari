@@ -1,35 +1,54 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import OPENAI_API_KEY from "./config/openai.js";
-function App() {
-	const [response, setResponse] = useState("");
-	useEffect(() => {
-		// const fetchData = async () => {
-		// 	try {
-		// 		const response = await axios.post(
-		// 			"https://api.openai.com/v1/engines/davinci-codex/completions",
-		// 			{
-		// 				prompt: "Once upon a time",
-		// 				max_tokens: 100,
-		// 			},
-		// 			{
-		// 				headers: {
-		// 					"Content-Type": "application/json",
-		// 					Authorization: `Bearer ${OPENAI_API_KEY}`,
-		// 				},
-		// 			}
-		// 		);
-		// 		setResponse(response.data.choices[0].text);
-		// 	} catch (error) {
-		// 		console.error("Error:", error);
-		// 	}
-		// };
-		// fetchData();
-	}, []);
+import { useState } from "react";
+import OpenAI from "openai";
+
+const App = () => {
+	const openai = new OpenAI({
+		apiKey: "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",
+	});
+	const [prompt, setPrompt] = useState("");
+	const [apiResponse, setApiResponse] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		try {
+			const result = await openai.createCompletion({
+				model: "text-davinci-003",
+				prompt: prompt,
+				temperature: 0.5,
+				max_tokens: 4000,
+			});
+			//console.log("response", result.data.choices[0].text);
+			setApiResponse(result.data.choices[0].text);
+		} catch (e) {
+			//console.log(e);
+			setApiResponse("Something is going wrong, Please try again.");
+		}
+		setLoading(false);
+	};
 
 	return (
 		<div className="background flex w-screen h-screen bg-[#DAC69A] items-center justify-center">
-			<p>{response}</p>
+			<form onSubmit={handleSubmit}>
+				<textarea
+					type="text"
+					value={prompt}
+					placeholder="Please ask to openai"
+					onChange={(e) => setPrompt(e.target.value)}
+				></textarea>
+				<button disabled={loading || prompt.length === 0} type="submit">
+					{loading ? "Generating..." : "Generate"}
+				</button>
+			</form>
+			{apiResponse && (
+				<div className="flex justify-center">
+					<pre>
+						<strong>API response:</strong>
+						{apiResponse}
+					</pre>
+				</div>
+			)}
 			<div className="content flex flex-col w-[60%] h-[70%] gap-[10%] items-center justify-center">
 				<div className="questions w-[100%] h-[70%] border-4 border-black bg-white"></div>
 				<div className="answers w-[100%] h-[30%] grid grid-cols-2 grid-rows-2 gap-8">
@@ -69,5 +88,6 @@ function App() {
 			</div>
 		</div>
 	);
-}
+};
+
 export default App;
