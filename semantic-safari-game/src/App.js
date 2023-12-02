@@ -10,6 +10,8 @@ const App = () => {
 	});
 
 	const [score, setScore] = useState(0);
+	const [timer, setTimer] = useState(60);
+	const [boost, setBoost] = useState(5);
 
 	useEffect(() => {
 		fetchQuestion();
@@ -52,9 +54,26 @@ const App = () => {
 	return (
 		<div className="background flex w-screen h-screen bg-[#DAC69A] items-center justify-center">
 			<div className="content flex flex-col w-[60%] h-[70%] gap-[10%] items-center justify-center">
-				<div className="questions flex flex-col w-[100%] h-[70%] border-4 border-black bg-white items-center justify-center">
-					<p id="question">{question.definition}</p>
-					<p>Score: {score}</p>
+				<div className="gameDisplay flex w-[100%] h-[70%] p-4 border-4 border-black bg-white items-center justify-center">
+					<div className="flex flex-col h-full items-center justify-center">
+						<h1 className="mb-2">Timer</h1>
+						<div className="w-4 h-full bg-black"></div>
+					</div>
+					<div className="flex flex-col w-full h-full items-center justify-between">
+						<p
+							id="question"
+							className="text-3xl font-semibold justify-self-start mt-8"
+						>
+							{question.definition}
+						</p>
+						<p id="score" className="text-3xl font-semibold justify-self-end">
+							Score: {score}
+						</p>
+					</div>
+					<div className="flex flex-col h-full items-center justify-center">
+						<h1 className="mb-2">Boost</h1>
+						<div className="w-4 h-full bg-black"></div>
+					</div>
 				</div>
 				<div className="answers w-[100%] h-[30%] grid grid-cols-2 grid-rows-2 gap-8">
 					{question.options.map((option, index) => (
@@ -68,38 +87,6 @@ const App = () => {
 							</p>
 						</button>
 					))}
-					{/* <div
-						id="answer1Container"
-						className="flex border-4 border-black bg-white items-center justify-center"
-					>
-						<p id="answer1" className="text-3xl font-semibold">
-							Test
-						</p>
-					</div>
-					<div
-						id="answer2Container"
-						className="flex border-4 border-black bg-white items-center justify-center"
-					>
-						<p id="answer2" className="text-3xl font-semibold">
-							Test
-						</p>
-					</div>
-					<div
-						id="answer3Container"
-						className="flex border-4 border-black bg-white items-center justify-center"
-					>
-						<p id="answer3" className="text-3xl font-semibold">
-							Test
-						</p>
-					</div>
-					<div
-						id="answer4Container"
-						className="flex border-4 border-black bg-white items-center justify-center"
-					>
-						<p id="answer4" className="text-3xl font-semibold">
-							Test
-						</p>
-					</div> */}
 				</div>
 			</div>
 		</div>
