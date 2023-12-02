@@ -11,7 +11,7 @@ const App = () => {
 
 	const [score, setScore] = useState(0);
 	const [timer, setTimer] = useState(60);
-	const [boost, setBoost] = useState(5);
+	const [boost, setBoost] = useState(10);
 	const [running, setRunning] = useState(false);
 
 	useEffect(() => {
@@ -43,13 +43,19 @@ const App = () => {
 
 	const handleAnswerClick = (selectedAnswer) => {
 		// Check if the selected answer is correct
-		const isCorrect = selectedAnswer === question.correctAnswer;
+		const isCorrect =
+			selectedAnswer.toLocaleLowerCase() ===
+			question.correctAnswer.toLocaleLowerCase();
 
 		// Update the score based on the correctness of the answer
-		setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
+		// setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
+		isCorrect && setScore(score + 10 + boost);
 
 		// Fetch the next question after handling the answer (if needed)
 		fetchQuestion();
+
+		//Reset boost timer
+		setBoost(10);
 	};
 
 	const handleGameStatus = () => {
@@ -153,7 +159,7 @@ const App = () => {
 								<div
 									className="w-full bg-orange-400"
 									style={{
-										height: `${(boost / 5) * 100}%`,
+										height: `${(boost / 10) * 100}%`,
 										transition: "height 1s linear",
 									}}
 								></div>
