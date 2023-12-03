@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const OpenAI = require('openai');
+const { Configuration, OpenAIApi } = require('openai');
 const cors = require('cors');
 
 const app = express();
@@ -9,32 +9,29 @@ app.use(cors()); // Enable CORS
 
 app.use(bodyParser.json());
 
-const openai = new OpenAI({ apiKey: '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' });
+// Initialize OpenAI with the API key from environment variables
+const openai = new OpenAIApi(new Configuration({ apiKey: process.env.OPENAI_API_KEY }));
 
 app.post('/api/generate-questions', async (req, res) => {
-
   try {
-    const prompt = 'Generate a quiz question: ';
-    const completion = await openai.completions.create({
+    // New prompt structure asking for a question followed by multiple choices
+    const prompt = 'Generate a multiple-choice question with one correct answer and three plausible but incorrect answers. List the answers as options A, B, C, and D.';
+    const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: prompt,
-        max_tokens: 100,
-      });
+        max_tokens: 150,
+        temperature: 0.7,
+    });
 
-    // Extract the generated question from the API response
-    const generatedQuestion = completion.choices[0].text.trim();
+    // Extract the generated text
+    const generatedText = completion.data.choices[0].text.trim();
+    
+    // TODO: Parse the generatedText to separate the question and the answer choices.
+    // This parsing logic will depend on the structure of the generatedText.
+    // You may need to manually identify the correct and incorrect answers based on the structure.
 
-    // For simplicity, use a static set of answer choices
-    const options = ['Choice A', 'Choice B', 'Choice C', 'Choice D'];
-    const correctAnswer = options[Math.floor(Math.random() * options.length)];
-
-    const quizQuestion = {
-      definition: generatedQuestion,
-      options: options,
-      correctAnswer: correctAnswer,
-    };
-
-    res.json({ question: quizQuestion });
+    // For now, return the generatedText to the client for demonstration
+    res.json({ generatedText: generatedText });
   } catch (error) {
     console.error('Error generating question:', error);
     res.status(500).json({ error: 'Internal Server Error' });
