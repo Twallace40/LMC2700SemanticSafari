@@ -23,5 +23,5 @@ const shape = [{
   console.log(completion.data.choices[0].message);
   const questions = JSON.parse(completion.data.choices[0].message.content;
   console.log('questions'), questions
-  await fs.writeFile('./src/data/questions.json'), JSON.stringify(questions, null, 2))
+  await fs.writeFile('./src/questions.json'), JSON.stringify(questions, null, 2))
 })();
