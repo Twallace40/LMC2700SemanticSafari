@@ -1,6 +1,7 @@
-// src/components/QuizGame.js
-
 import React, { useState, useEffect } from "react";
+import giraffeImage from "./assets/giraffe.png";
+import monkeyImage from "./assets/monkey new.png";
+import leafImage from "./assets/leaf 1.png";
 
 const App = () => {
 	const [question, setQuestion] = useState({
@@ -63,7 +64,7 @@ const App = () => {
 			setRunning(false);
 			setScore(0);
 			setTimer(60);
-			setBoost(5);
+			setBoost(10);
 		} else {
 			// startTimer();
 			// startBoostTimer();
@@ -108,10 +109,20 @@ const App = () => {
 	}, [running]);
 
 	return (
-		<div className="background flex w-screen h-screen bg-[#DAC69A] items-center justify-center">
-			<div className="content flex flex-col w-[60%] h-[70%] gap-[10%] items-center justify-center">
+		<div className="background flex w-screen h-screen bg-[#DAC69A] z-0">
+			<div className="flex flex-col h-full justify-between">
+				<img
+					src={leafImage}
+					className="w-[148px] h-[152px] z-10 self-end transform -scale-x-100 m-4"
+				/>
+				<img
+					src={giraffeImage}
+					className="w-[148px] h-[200px] z-10 rotate-[-12deg] transform -scale-x-100 mb-8"
+				/>
+			</div>
+			<div className="content z-20 flex flex-col w-[70%] h-[70%] gap-[10%] self-center mx-auto">
 				<div
-					className={`gameDisplay flex w-[100%] h-[70%] p-4 border-4 border-black items-center justify-center ${
+					className={`gameDisplay z-10 flex w-[100%] h-[70%] p-4 border-4 border-black items-center justify-center ${
 						timer === 0 ? "bg-red-400" : "bg-white"
 					}`}
 				>
@@ -180,6 +191,10 @@ const App = () => {
 						</button>
 					))}
 				</div>
+			</div>
+			<div className="flex flex-col h-full justify-between">
+				<img src={monkeyImage} className="w-[148px] h-[152px] z-10" />
+				<img src={leafImage} className="w-[148px] h-[152px] z-10 self-end" />
 			</div>
 		</div>
 	);
