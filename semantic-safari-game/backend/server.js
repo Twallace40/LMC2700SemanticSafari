@@ -5,33 +5,29 @@ const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3001;
-app.use(cors()); // Enable CORS
-
+app.use(cors());
 app.use(bodyParser.json());
 
 const openai = new OpenAI({ apiKey: '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' });
 
 app.post('/api/generate-questions', async (req, res) => {
-
   try {
-    const prompt = 'Generate a quiz question: ';
+    const prompt = 'Generate a quiz question with four options, where only one option is correct:';
     const completion = await openai.completions.create({
-        model: "text-davinci-003",
-        prompt: prompt,
-        max_tokens: 100,
-      });
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens: 100
+    });
 
-    // Extract the generated question from the API response
-    const generatedQuestion = completion.choices[0].text.trim();
-
-    // For simplicity, use a static set of answer choices
-    const options = ['Choice A', 'Choice B', 'Choice C', 'Choice D'];
-    const correctAnswer = options[Math.floor(Math.random() * options.length)];
+    const generatedContent = completion.choices[0].text.trim().split('\n');
+    const generatedQuestion = generatedContent[0];
+    const options = generatedContent.slice(1, 5); // Assumes options are formatted in lines after the question
+    // Here, you need to identify the correct answer. This will depend on how the answers are formatted in the response.
 
     const quizQuestion = {
       definition: generatedQuestion,
       options: options,
-      correctAnswer: correctAnswer,
+      correctAnswer: /* Logic to determine the correct answer */
     };
 
     res.json({ question: quizQuestion });
