@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 const cors = require('cors');
 
 const app = express();
@@ -9,39 +9,27 @@ app.use(cors()); // Enable CORS
 
 app.use(bodyParser.json());
 
-// Initialize OpenAI with the API key from environment variables
-const openai = new OpenAIApi(new Configuration({ apiKey: process.env.OPENAI_API_KEY }));
+const openai = new OpenAI({ apiKey: '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' });
 
 app.post('/api/generate-questions', async (req, res) => {
+
   try {
-    // New prompt structure asking for a question with multiple choices
-    const prompt = 'Generate a multiple-choice question and provide four options.';
-    const completion = await openai.createCompletion({
+    const prompt = 'Generate a quiz question: ';
+    const completion = await openai.completions.create({
         model: "text-davinci-003",
         prompt: prompt,
-        max_tokens: 150,
-        temperature: 0.7,
-    });
+        max_tokens: 100,
+      });
 
-    // Extract the generated text
-    const generatedText = completion.data.choices[0].text.trim();
-    
-    // Here you would parse the generatedText to separate the question from the options
-    // The parsing logic will depend on the structure of the generatedText.
-    // Since the AI does not know which is the correct answer, you would have to designate one.
-    // For example, if the output is structured with the question followed by four options, you might do:
+    // Extract the generated question from the API response
+    const generatedQuestion = completion.choices[0].text.trim();
 
-    // Split the text by newline to separate the question and options
-    const lines = generatedText.split('\n');
-    const question = lines[0];
-    const options = lines.slice(1); // This assumes the options follow the question and are on separate lines
-
-    // Randomly select a correct answer
-    const correctIndex = Math.floor(Math.random() * options.length);
-    const correctAnswer = options[correctIndex];
+    // For simplicity, use a static set of answer choices
+    const options = ['Choice A', 'Choice B', 'Choice C', 'Choice D'];
+    const correctAnswer = options[Math.floor(Math.random() * options.length)];
 
     const quizQuestion = {
-      definition: question,
+      definition: generatedQuestion,
       options: options,
       correctAnswer: correctAnswer,
     };
