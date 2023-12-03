@@ -10,7 +10,7 @@ app.use(cors()); // Enable CORS
 app.use(bodyParser.json());
 
 // Initialize OpenAI with the API key from environment variables
-const openai = new OpenAIApi(new Configuration({ apiKey: process.env.OPENAI_API_KEY }));
+const openai = new OpenAI({ apiKey: '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' });
 
 app.post('/api/generate-questions', async (req, res) => {
   try {
