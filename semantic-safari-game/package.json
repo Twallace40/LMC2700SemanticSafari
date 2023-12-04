@@ -1,7 +1,7 @@
 {
 	"name": "semantic-safari-game",
 	"version": "0.1.0",
-	"homepage": "https://Twallace40.github.io/LMC2700SemanticSafari",
+	"homepage": "https://twallace40.github.io/LMC2700SemanticSafari",
 	"private": false,
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.17.0",
@@ -25,7 +25,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
-  		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -46,6 +46,7 @@
 		]
 	},
 	"devDependencies": {
-		"concurrently": "^8.2.2"
+		"concurrently": "^8.2.2",
+		"gh-pages": "^6.1.0"
 	}
 }
