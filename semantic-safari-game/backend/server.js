@@ -39,7 +39,7 @@ app.post('/api/generate-questions', async (req, res) => {
     console.error('Error generating question:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+}); **/
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
