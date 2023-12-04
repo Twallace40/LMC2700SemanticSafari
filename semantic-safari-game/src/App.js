@@ -1,46 +1,77 @@
+import questionsData from '.semantic-safari-game/backend/questions.json';
 import React, { useState, useEffect } from "react";
 import giraffeImage from "./assets/giraffe.png";
 import monkeyImage from "./assets/monkey new.png";
 import leafImage from "./assets/leaf 1.png";
 
+
 const App = () => {
-	const [question, setQuestion] = useState({
-		definition: "This is an example definition.",
-		options: ["option1", "option2", "option3", "option4"],
-		correctAnswer: "",
-	});
+  const [question, setQuestion] = useState(null);
+  const [score, setScore] = useState(0);
+  const [timer, setTimer] = useState(60);
+  const [boost, setBoost] = useState(10);
+  const [running, setRunning] = useState(false);
 
-	const [score, setScore] = useState(0);
-	const [timer, setTimer] = useState(60);
-	const [boost, setBoost] = useState(10);
-	const [running, setRunning] = useState(false);
+  useEffect(() => {
+    if (questionsData.length > 0) {
+      fetchQuestion();
+    }
+  }, [questionsData]);
 
-	useEffect(() => {
-		fetchQuestion();
-	}, []);
+  const fetchQuestion = () => {
+    const randomIndex = Math.floor(Math.random() * questionsData.length);
+    const newQuestion = questionsData[randomIndex];
+    const options = [newQuestion.answer, ...newQuestion.wrongAnswers].sort(() => Math.random() - 0.5);
+    setQuestion({
+      definition: newQuestion.question,
+      options: options,
+      correctAnswer: newQuestion.answer,
+    });
+  };
+// import React, { useState, useEffect } from "react";
+// import giraffeImage from "./assets/giraffe.png";
+// import monkeyImage from "./assets/monkey new.png";
+// import leafImage from "./assets/leaf 1.png";
 
-	const fetchQuestion = async () => {
-		try {
-			const response = await fetch(
-				"http://localhost:3001/api/generate-questions",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			);
+// const App = () => {
+//   const [question, setQuestion] = useState({
+//     definition: "This is an example definition.",
+//     options: ["option1", "option2", "option3", "option4"],
+//     correctAnswer: "",
+//   });
 
-			if (!response.ok) {
-				throw new Error("Error fetching question");
-			}
+//   const [score, setScore] = useState(0);
+//   const [timer, setTimer] = useState(60);
+//   const [boost, setBoost] = useState(10);
+//   const [running, setRunning] = useState(false);
 
-			const data = await response.json();
-			setQuestion(data.question);
-		} catch (error) {
-			console.error("Error fetching question:", error);
-		}
-	};
+//   useEffect(() => {
+//     fetchQuestion();
+//   }, []);
+
+//   const fetchQuestion = async () => {
+//     try {
+//       const response = await fetch(
+//         "http://localhost:3001/api/generate-questions",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+
+//       if (!response.ok) {
+//         throw new Error("Error fetching question");
+//       }
+
+//       const data = await response.json();
+//       setQuestion(data.question);
+//     } catch (error) {
+//       console.error("Error fetching question:", error);
+//     }
+//   };
+// };
 
 	const handleAnswerClick = (selectedAnswer) => {
 		// Check if the selected answer is correct
