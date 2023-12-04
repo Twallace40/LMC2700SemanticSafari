@@ -1,9 +1,8 @@
-import questionsData from '.semantic-safari-game/backend/questions.json';
 import React, { useState, useEffect } from "react";
+import questionsData from './semantic-safari-game/backend/questions.json'; // Adjust the path as needed
 import giraffeImage from "./assets/giraffe.png";
 import monkeyImage from "./assets/monkey new.png";
 import leafImage from "./assets/leaf 1.png";
-
 
 const App = () => {
   const [question, setQuestion] = useState(null);
@@ -13,15 +12,22 @@ const App = () => {
   const [running, setRunning] = useState(false);
 
   useEffect(() => {
-    if (questionsData.length > 0) {
-      fetchQuestion();
+    fetchQuestion();
+  }, []);
+
+  const shuffleOptions = (options) => {
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
     }
-  }, [questionsData]);
+    return options;
+  };
 
   const fetchQuestion = () => {
     const randomIndex = Math.floor(Math.random() * questionsData.length);
     const newQuestion = questionsData[randomIndex];
-    const options = [newQuestion.answer, ...newQuestion.wrongAnswers].sort(() => Math.random() - 0.5);
+    const options = shuffleOptions([newQuestion.answer, ...newQuestion.wrongAnswers]);
+
     setQuestion({
       definition: newQuestion.question,
       options: options,
