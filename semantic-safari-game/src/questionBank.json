@@ -1,0 +1,142 @@
+[
+	{
+		"question": "What is the process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water, involving the green pigment chlorophyll and generating oxygen as a by-product?",
+		"answer": "Photosynthesis",
+		"wrongAnswers": ["Respiration", "Fermentation", "Condensation"]
+	},
+	{
+		"question": "What is the quality of being honest and having strong moral principles?",
+		"answer": "Integrity",
+		"wrongAnswers": ["Ambiguity", "Expedience", "Perversion"]
+	},
+	{
+		"question": "What is the action of making an unpleasant feeling less intense?",
+		"answer": "Mitigation",
+		"wrongAnswers": ["Acrimony", "Exacerbation", "Redemption"]
+	},
+	{
+		"question": "What is the act of deceiving someone by using a false appearance or statement?",
+		"answer": "Deception",
+		"wrongAnswers": ["Veracity", "Rectitude", "Altruism"]
+	},
+	{
+		"question": "What is the state of being calm, peaceful, and untroubled?",
+		"answer": "Serenity",
+		"wrongAnswers": ["Turbulence", "Hostility", "Agitation"]
+	},
+	{
+		"question": "What is the act of taking someone else's work, ideas, or words and using them as one's own?",
+		"answer": "Plagiarism",
+		"wrongAnswers": ["Originality", "Innovation", "Citation"]
+	},
+	{
+		"question": "What is the willingness to respect and accept the opinions, beliefs, and practices of others?",
+		"answer": "Tolerance",
+		"wrongAnswers": ["Bigotry", "Prejudice", "Intolerance"]
+	},
+	{
+		"question": "What is a state of being extremely poor and lacking the necessities of life?",
+		"answer": "Destitution",
+		"wrongAnswers": ["Prosperity", "Affluence", "Opulence"]
+	},
+	{
+		"question": "What is a strong feeling of dislike, opposition, or antipathy towards someone or something?",
+		"answer": "Aversion",
+		"wrongAnswers": ["Fondness", "Admiration", "Affection"]
+	},
+	{
+		"question": "What is a feeling of deep admiration for someone or something elicited by their abilities, qualities, or achievements?",
+		"answer": "Adulation",
+		"wrongAnswers": ["Derision", "Contempt", "Censure"]
+	},
+	{
+		"question": "What is the act of ending a dispute or conflict through compromise or negotiation?",
+		"answer": "Resolution",
+		"wrongAnswers": ["Proliferation", "Exacerbation", "Agitation"]
+	},
+	{
+		"question": "What is the use of humor, irony, exaggeration, or ridicule to expose and criticize people's stupidity or vices?",
+		"answer": "Satire",
+		"wrongAnswers": ["Compliment", "Praise", "Admiration"]
+	},
+	{
+		"question": "What is the expression of approval or admiration for someone or something?",
+		"answer": "Acclamation",
+		"wrongAnswers": ["Censure", "Criticism", "Disapproval"]
+	},
+	{
+		"question": "What is the act of speaking or writing about someone or something in a derogatory or damaging way?",
+		"answer": "Defamation",
+		"wrongAnswers": ["Praise", "Admiration", "Commendation"]
+	},
+	{
+		"question": "What is the act of speaking or acting in a way that suggests one has knowledge or awareness of something secretive or unknown?",
+		"answer": "Innuendo",
+		"wrongAnswers": ["Clarity", "Transparency", "Disclosure"]
+	},
+	{
+		"question": "What is the quality of being open and honest in expression, free from pretense or deceit?",
+		"answer": "Candor",
+		"wrongAnswers": ["Dishonesty", "Deception", "Evasiveness"]
+	},
+	{
+		"question": "What is the act of showing excessive pride and self-satisfaction in one's achievements, possessions, or abilities?",
+		"answer": "Hubris",
+		"wrongAnswers": ["Humility", "Modesty", "Meekness"]
+	},
+	{
+		"question": "What is a feeling of intense sorrow, typically caused by the loss of someone or something loved?",
+		"answer": "Grief",
+		"wrongAnswers": ["Joy", "Elation", "Ecstasy"]
+	},
+	{
+		"question": "What is the state of being unable to be avoided, evaded, or escaped?",
+		"answer": "Inevitability",
+		"wrongAnswers": ["Contingency", "Uncertainty", "Ambiguity"]
+	},
+	{
+		"question": "What is the quality of being insincere or deceptive in speech or actions?",
+		"answer": "Duplicity",
+		"wrongAnswers": ["Honesty", "Sincerity", "Candor"]
+	},
+	{
+		"question": "What is the act of trying to make someone believe something that is not true?",
+		"answer": "Deceit",
+		"wrongAnswers": ["Honesty", "Integrity", "Transparency"]
+	},
+	{
+		"question": "What is a feeling of discomfort or unease, often felt in anticipation of a future event?",
+		"answer": "Apprehension",
+		"wrongAnswers": ["Confidence", "Assurance", "Certainty"]
+	},
+	{
+		"question": "What is the act of deliberately causing someone to believe something that is not true?",
+		"answer": "Duping",
+		"wrongAnswers": ["Enlightening", "Instructing", "Teaching"]
+	},
+	{
+		"question": "What is a lack of interest, enthusiasm, or concern, often accompanied by a sense of weariness?",
+		"answer": "Apathy",
+		"wrongAnswers": ["Passion", "Zeal", "Eagerness"]
+	},
+	{
+		"question": "What is the state of being bewildered or confused, typically as a result of something unexpected?",
+		"answer": "Bewilderment",
+		"wrongAnswers": ["Clarity", "Comprehension", "Understanding"]
+	},
+	{
+		"question": "What is the quality of being resistant to change or difficult to move, alter, or overcome?",
+		"answer": "Inertia",
+		"wrongAnswers": ["Dynamism", "Agility", "Flexibility"]
+	},
+	{
+		"question": "What is a state of being unimportant or insignificant?",
+		"answer": "Triviality",
+		"wrongAnswers": ["Significance", "Importance", "Seriousness"]
+	},
+	{
+		"question": "What is a feeling of guilt or moral unease, often arising from a sense of wrongdoing?",
+		"answer": "Remorse",
+		"wrongAnswers": ["Justification", "Sophisticated", "Agitated"]
+	}
+]

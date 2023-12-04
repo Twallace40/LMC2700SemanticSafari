@@ -1,85 +1,89 @@
 import React, { useState, useEffect } from "react";
-import questionsData from './semantic-safari-game/backend/questions.json'; // Adjust the path as needed
+import questionsData from "./questionBank.json"; // Adjust the path as needed
 import giraffeImage from "./assets/giraffe.png";
 import monkeyImage from "./assets/monkey new.png";
 import leafImage from "./assets/leaf 1.png";
 
 const App = () => {
-  const [question, setQuestion] = useState({
-    definition: "",
-    options: [],
-    correctAnswer: "",
-  });
-  const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(60);
-  const [boost, setBoost] = useState(10);
-  const [running, setRunning] = useState(false);
+	const [question, setQuestion] = useState({
+		definition: "",
+		options: [],
+		correctAnswer: "",
+	});
+	const [score, setScore] = useState(0);
+	const [timer, setTimer] = useState(60);
+	const [boost, setBoost] = useState(10);
+	const [running, setRunning] = useState(false);
 
-  useEffect(() => {
-    fetchQuestion();
-  }, []);
+	useEffect(() => {
+		fetchQuestion();
+	}, []);
 
-  const shuffleOptions = (options) => {
-    for (let i = options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [options[i], options[j]] = [options[j], options[i]];
-    }
-    return options;
-  };
+	const shuffleOptions = (options) => {
+		for (let i = options.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[options[i], options[j]] = [options[j], options[i]];
+		}
+		return options;
+	};
 
-  const fetchQuestion = () => {
-    const randomIndex = Math.floor(Math.random() * questionsData.length);
-    const newQuestion = questionsData[randomIndex];
-    const options = shuffleOptions([newQuestion.answer, ...newQuestion.wrongAnswers]);
-    setQuestion({
-      definition: newQuestion.question,
-      options: options,
-      correctAnswer: newQuestion.answer,
-    });
-  };
+	const fetchQuestion = () => {
+		const randomIndex = Math.floor(Math.random() * questionsData.length);
+		const newQuestion = questionsData[randomIndex];
+		const options = shuffleOptions([
+			newQuestion.answer,
+			...newQuestion.wrongAnswers,
+		]);
+		setQuestion({
+			definition: newQuestion.question,
+			options: options,
+			correctAnswer: newQuestion.answer,
+		});
+	};
 
-  const handleAnswerClick = (selectedAnswer) => {
-    const isCorrect = selectedAnswer.toLowerCase() === question.correctAnswer.toLowerCase();
-    if (isCorrect) {
-      setScore(score + 10 + boost);
-    }
-    fetchQuestion();
-    setBoost(10);
-  };
+	const handleAnswerClick = (selectedAnswer) => {
+		const isCorrect =
+			selectedAnswer.toLowerCase() === question.correctAnswer.toLowerCase();
+		if (isCorrect) {
+			setScore(score + 10 + boost);
+		}
+		fetchQuestion();
+		setBoost(10);
+	};
 
-  const handleGameStatus = () => {
-    setRunning(!running);
-    if (!running) {
-      setScore(0);
-      setTimer(60);
-      setBoost(10);
-      fetchQuestion();
-    }
-  };
+	const handleGameStatus = () => {
+		setRunning(!running);
+		if (!running) {
+			setScore(0);
+			setTimer(60);
+			setBoost(10);
+			fetchQuestion();
+		}
+	};
 
-  useEffect(() => {
-    let timerInterval;
-    if (running && timer > 0) {
-      timerInterval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-    } else if (!running || timer === 0) {
-      clearInterval(timerInterval);
-    }
-    return () => clearInterval(timerInterval);
-  }, [running, timer]);
+	useEffect(() => {
+		let timerInterval;
+		if (running && timer > 0) {
+			timerInterval = setInterval(() => {
+				setTimer((prevTimer) => prevTimer - 1);
+			}, 1000);
+		} else if (!running || timer === 0) {
+			clearInterval(timerInterval);
+		}
+		return () => clearInterval(timerInterval);
+	}, [running, timer]);
 
-  useEffect(() => {
-    let boostInterval;
-    if (running && boost > 0) {
-      boostInterval = setInterval(() => {
-        setBoost((prevBoost) => prevBoost - 1);
-      }, 1000);
-    } else {
-      clearInterval(boostInterval);
-    }
-    return () => clearInterval(boostInterval);
-  }, [running, boost]);
+	useEffect(() => {
+		let boostInterval;
+		if (running && boost > 0) {
+			boostInterval = setInterval(() => {
+				setBoost((prevBoost) => prevBoost - 1);
+			}, 1000);
+		} else {
+			clearInterval(boostInterval);
+		}
+		return () => clearInterval(boostInterval);
+	}, [running, boost]);
 
 	return (
 		<div className="background flex w-screen h-screen bg-[#DAC69A] z-0">
@@ -120,10 +124,10 @@ const App = () => {
 						>
 							{running ? "END GAME" : "START GAME"}
 						</button>
-						{timer > 0 ? (
+						{running && timer > 0 ? (
 							<p
 								id="question"
-								className="text-3xl font-semibold justify-self-start"
+								className="text-3xl font-semibold justify-self-start px-8"
 							>
 								{question.definition}
 							</p>
@@ -139,7 +143,7 @@ const App = () => {
 					<div className="flex flex-col h-full items-center justify-center">
 						<h1 className="mb-2 font-medium">Boost</h1>
 						<div className="flex w-8 h-full border-2 border-black items-end">
-							{timer > 0 && (
+							{running && timer > 0 && (
 								<div
 									className="w-full bg-orange-400"
 									style={{
@@ -158,9 +162,14 @@ const App = () => {
 							className="flex border-4 border-black bg-white items-center justify-center"
 							onClick={() => handleAnswerClick(option)}
 						>
-							<p id={`answer1${index + 1}`} className="text-3xl font-semibold">
-								{option.toLocaleLowerCase()}
-							</p>
+							{running && timer > 0 && (
+								<p
+									id={`answer1${index + 1}`}
+									className="text-3xl font-semibold"
+								>
+									{option.toLocaleLowerCase()}
+								</p>
+							)}
 						</button>
 					))}
 				</div>
