@@ -38,51 +38,6 @@ const App = () => {
       correctAnswer: newQuestion.answer,
     });
   };
-// import React, { useState, useEffect } from "react";
-// import giraffeImage from "./assets/giraffe.png";
-// import monkeyImage from "./assets/monkey new.png";
-// import leafImage from "./assets/leaf 1.png";
-
-// const App = () => {
-//   const [question, setQuestion] = useState({
-//     definition: "This is an example definition.",
-//     options: ["option1", "option2", "option3", "option4"],
-//     correctAnswer: "",
-//   });
-
-//   const [score, setScore] = useState(0);
-//   const [timer, setTimer] = useState(60);
-//   const [boost, setBoost] = useState(10);
-//   const [running, setRunning] = useState(false);
-
-//   useEffect(() => {
-//     fetchQuestion();
-//   }, []);
-
-//   const fetchQuestion = async () => {
-//     try {
-//       const response = await fetch(
-//         "http://localhost:3001/api/generate-questions",
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       if (!response.ok) {
-//         throw new Error("Error fetching question");
-//       }
-
-//       const data = await response.json();
-//       setQuestion(data.question);
-//     } catch (error) {
-//       console.error("Error fetching question:", error);
-//     }
-//   };
-// };
-
 	const handleAnswerClick = (selectedAnswer) => {
 		// Check if the selected answer is correct
 		const isCorrect =
