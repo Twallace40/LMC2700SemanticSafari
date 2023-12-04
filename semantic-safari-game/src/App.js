@@ -131,9 +131,13 @@ const App = () => {
 							>
 								{question.definition} {/* Displaying the current question */}
 							</p>
-						) : (
+						) : timer === 0 ? (
 							<p className="text-3xl font-semibold justify-self-start">
 								GAME OVER
+							</p>
+						) : (
+							<p className="text-3xl font-semibold justify-self-start">
+								Welcome!
 							</p>
 						)}
 						<p id="score" className="text-3xl font-semibold justify-self-end">
