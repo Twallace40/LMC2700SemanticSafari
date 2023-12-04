@@ -31,78 +31,55 @@ const App = () => {
     const randomIndex = Math.floor(Math.random() * questionsData.length);
     const newQuestion = questionsData[randomIndex];
     const options = shuffleOptions([newQuestion.answer, ...newQuestion.wrongAnswers]);
-
     setQuestion({
       definition: newQuestion.question,
       options: options,
       correctAnswer: newQuestion.answer,
     });
   };
-	const handleAnswerClick = (selectedAnswer) => {
-		// Check if the selected answer is correct
-		const isCorrect =
-			selectedAnswer.toLocaleLowerCase() ===
-			question.correctAnswer.toLocaleLowerCase();
 
-		// Update the score based on the correctness of the answer
-		// setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
-		isCorrect && setScore(score + 10 + boost);
+  const handleAnswerClick = (selectedAnswer) => {
+    const isCorrect = selectedAnswer.toLowerCase() === question.correctAnswer.toLowerCase();
+    if (isCorrect) {
+      setScore(score + 10 + boost);
+    }
+    fetchQuestion();
+    setBoost(10);
+  };
 
-		// Fetch the next question after handling the answer (if needed)
-		fetchQuestion();
+  const handleGameStatus = () => {
+    setRunning(!running);
+    if (!running) {
+      setScore(0);
+      setTimer(60);
+      setBoost(10);
+      fetchQuestion();
+    }
+  };
 
-		//Reset boost timer
-		setBoost(10);
-	};
+  useEffect(() => {
+    let timerInterval;
+    if (running && timer > 0) {
+      timerInterval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (!running || timer === 0) {
+      clearInterval(timerInterval);
+    }
+    return () => clearInterval(timerInterval);
+  }, [running, timer]);
 
-	const handleGameStatus = () => {
-		if (running) {
-			setRunning(false);
-			setScore(0);
-			setTimer(60);
-			setBoost(10);
-		} else {
-			// startTimer();
-			// startBoostTimer();
-			setRunning(true);
-		}
-	};
-
-	useEffect(() => {
-		let timerInterval;
-		if (running) {
-			timerInterval = setInterval(() => {
-				setTimer((prevTimer) => {
-					if (prevTimer > 0) {
-						return prevTimer - 1;
-					} else {
-						return 0;
-					}
-				});
-			}, 1000);
-		} else {
-			clearInterval(timerInterval);
-		}
-		return () => clearInterval(timerInterval);
-	}, [running]);
-
-	useEffect(() => {
-		let boostInterval;
-		if (running) {
-			boostInterval = setInterval(() => {
-				setBoost((prevBoost) => {
-					if (prevBoost > 0) {
-						return prevBoost - 1;
-					} else {
-						return 0;
-					}
-				});
-			}, 1000);
-		} else {
-			clearInterval(boostInterval);
-		}
-		return () => clearInterval(boostInterval);
-	}, [running]);
+  useEffect(() => {
+    let boostInterval;
+    if (running && boost > 0) {
+      boostInterval = setInterval(() => {
+        setBoost((prevBoost) => prevBoost - 1);
+      }, 1000);
+    } else {
+      clearInterval(boostInterval);
+    }
+    return () => clearInterval(boostInterval);
+  }, [running, boost]);
 
 	return (
 		<div className="background flex w-screen h-screen bg-[#DAC69A] z-0">
