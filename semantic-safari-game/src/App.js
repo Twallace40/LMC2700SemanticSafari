@@ -5,7 +5,11 @@ import monkeyImage from "./assets/monkey new.png";
 import leafImage from "./assets/leaf 1.png";
 
 const App = () => {
-  const [question, setQuestion] = useState(null);
+  const [question, setQuestion] = useState({
+    definition: "",
+    options: [],
+    correctAnswer: "",
+  });
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(60);
   const [boost, setBoost] = useState(10);
