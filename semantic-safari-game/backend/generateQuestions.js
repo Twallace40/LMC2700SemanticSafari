@@ -1,4 +1,4 @@
-const fs = require("fs");
+/** const fs = require("fs");
 // const { Configuration, OpenAIApi, OpenAI } = require("openai");
 
 // // const configuration = new Configuration({
@@ -80,4 +80,4 @@ fetch("https://api.openai.com/v1/chat/completions", {
 		// const questions = JSON.parse(data.choices[0].message.content);
 		// console.log("questions");
 		fs.writeFile("./src/questions.json", JSON.stringify(data, null, 2));
-	});
+	}); **/
