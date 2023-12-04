@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/LMC2700SemanticSafari/static/css/main.b9c1f83d.css",
+    "main.js": "/LMC2700SemanticSafari/static/js/main.9e434f4f.js",
+    "static/js/787.0ffdfa1f.chunk.js": "/LMC2700SemanticSafari/static/js/787.0ffdfa1f.chunk.js",
+    "static/media/leaf 1.png": "/LMC2700SemanticSafari/static/media/leaf 1.e46430b995694a04c424.png",
+    "static/media/monkey new.png": "/LMC2700SemanticSafari/static/media/monkey new.58ab067a49c154f9c1e3.png",
+    "static/media/giraffe.png": "/LMC2700SemanticSafari/static/media/giraffe.556db7af16ce9817f300.png",
+    "index.html": "/LMC2700SemanticSafari/index.html",
+    "main.b9c1f83d.css.map": "/LMC2700SemanticSafari/static/css/main.b9c1f83d.css.map",
+    "main.9e434f4f.js.map": "/LMC2700SemanticSafari/static/js/main.9e434f4f.js.map",
+    "787.0ffdfa1f.chunk.js.map": "/LMC2700SemanticSafari/static/js/787.0ffdfa1f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b9c1f83d.css",
+    "static/js/main.9e434f4f.js"
+  ]
+}
