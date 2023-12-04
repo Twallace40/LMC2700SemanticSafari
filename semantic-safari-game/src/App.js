@@ -129,7 +129,7 @@ const App = () => {
 								id="question"
 								className="text-3xl font-semibold justify-self-start px-8"
 							>
-								{question.definition}
+								{question.definition} {/* Displaying the current question */}
 							</p>
 						) : (
 							<p className="text-3xl font-semibold justify-self-start">
@@ -163,11 +163,8 @@ const App = () => {
 							onClick={() => handleAnswerClick(option)}
 						>
 							{running && timer > 0 && (
-								<p
-									id={`answer1${index + 1}`}
-									className="text-3xl font-semibold"
-								>
-									{option.toLocaleLowerCase()}
+								<p id={`answer${index + 1}`} className="text-3xl font-semibold">
+									{option} {/* Displaying each option */}
 								</p>
 							)}
 						</button>
