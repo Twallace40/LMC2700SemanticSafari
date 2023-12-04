@@ -1,7 +1,7 @@
 {
 	"name": "semantic-safari-game",
 	"version": "0.1.0",
-	"homepage": "https://Twallace40.github.io/LMC2700SemanticSafari"
+	"homepage": "https://Twallace40.github.io/LMC2700SemanticSafari",
 	"private": false,
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.17.0",
